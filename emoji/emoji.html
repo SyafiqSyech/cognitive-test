@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>chimp</title>
+    <title>emoji</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="chimpstyle.css">
-    <script defer src="chimpcode.js"></script>
+    <link rel="stylesheet" href="emojistyle.css">
+    <script defer src="emojicode.js"></script>
 </head>
 <body>
     <div class="gamebox">
@@ -21,6 +21,7 @@
         </div>
         <div class="menu">
             <button class="start" onclick="resetGame()">Reset</button>
+            <button class="start" onclick="buttonPress(Math.floor(Math.random() * 1000)+ 100)">Right</button>
         </div>
     </div>
 </body>
