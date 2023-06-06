@@ -3,32 +3,59 @@ const startingRow = 4;
 const buttonSize = 80;
 const originallevel = 4;
 const maxlevel = 40;
-const originallives = 10;
 
 var grid = [startingColumn, startingRow];
 var level = originallevel;
-var lives = originallives;
+var time = level*5000;
+var lives = 3;
+var timeout = null;
+
+function closeGamePop(){
+    document.getElementById("gameBox").style.display = "flex";
+    document.getElementById("next").style.display = "none";
+    document.getElementById("start").style.display = "none";
+    document.getElementById("popTxt").style.display = "none";
+    timer()
+}
+
+function showGamePop(){
+    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("gameBox").style.display = "none";
+    document.getElementById("popTxt").style.display = "block";
+    if(lives == 0 || level > maxlevel){
+        document.getElementById("next").style.display = "none";
+        document.getElementById("highScore").innerHTML = level - originallevel;
+        document.getElementById("highScoreBox").style.display = "block";
+        return
+    }
+    document.getElementById("next").style.display = "block";
+}
+
+function showStart(){
+    document.getElementById("start").style.display = "block";
+    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("popTxt").style.display = "none";
+}
 
 function resetGame(){
     grid = [startingColumn, startingRow];
     level = originallevel;
-    lives = originallives;
-    document.getElementById("maxlevel").innerHTML = maxlevel-originallevel+1;
+    time = level*1000;
+    lives = 3;
 
     updateLevel();
     updateLife();
 
     startGame();
+
+    closeGamePop()
 }
 
 function startGame(){
     updateLevel();
     updateLife();
 
-    if(level > maxlevel){
-        win();
-        return;
-    }
+    time = level*1000
 
     var remBtnContainers = document.querySelectorAll(".btn_container");
     remBtnContainers.forEach((n) => {
@@ -71,18 +98,36 @@ function startGame(){
     }
 }
 
+function timer(){
+    document.getElementById("timeBox").style.animation = "timer "+time/1000+"s linear 1"
+    timeout = setTimeout(() => {
+        console.log("henlos")
+        hideButton()
+    }, time);
+}
+
+function stopTimeoutDisplay(){
+    document.getElementById("timeBox").style.animation = "none"
+}
+
+function hideButton(){
+    clearTimeout(timeout)
+    stopTimeoutDisplay()
+    var allGameButtons = document.querySelectorAll(".game_button");
+    allGameButtons.forEach((n) => {
+        n.innerHTML = "";
+    })
+}
+
 function buttonPress(num){
     now++;
+    if(now == 1){
+        hideButton()
+    }
     if(num != now){
         wrong();
         startGame();
         return;
-    }
-    if(now == 1){
-        var allGameButtons = document.querySelectorAll(".game_button");
-        allGameButtons.forEach((n) => {
-            n.innerHTML = "";
-        })
     }
     const gameButton = document.getElementById("gameButton"+num);
     gameButton.style.opacity = 0;
@@ -94,40 +139,63 @@ function buttonPress(num){
 }
 
 function wrong(){
+    document.getElementById("popTxt").innerHTML = "WRONG";
     console.log("WRONG")
     lives--;
-    updateLife(lives);
+    updateLife();
     if(lives == 0){
         lose();
+        return;
     }
+    showGamePop()
 }
 
 function right(){
+    document.getElementById("popTxt").innerHTML = "NICE";
     console.log("nice")
     level++
     if((level-originallevel+1)%5 == 0) grid[0]++;
-    if((level-originallevel+1)%9 == 0) grid[1]++;
+    if((level-originallevel+1)%8 == 0) grid[1]++;
     updateLevel(level);
+    if(level > maxlevel) win()
+    showGamePop();
     startGame();
 }
 
 function updateLife(){
-    const livesText = document.getElementById("lives");
-    livesText.innerHTML = lives;
+    if(lives == 3){
+        document.getElementById("life3").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life3").style.backgroundColor = "var(--cl1)";
+    }
+    
+    if(lives >= 2){
+        document.getElementById("life2").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life2").style.backgroundColor = "var(--cl1)";
+    }
+    
+    if(lives >= 1){
+        document.getElementById("life1").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life1").style.backgroundColor = "var(--cl1)";
+    }
 }
 
 function updateLevel(){
     const levelText = document.getElementById("level");
-    levelText.innerHTML = level-originallevel+1;
+    levelText.innerHTML = level-originallevel;
 }
 
 function win(){
+    document.getElementById("popTxt").innerHTML = "YOU WIN";
     console.log("You Win")
 }
 
 function lose(){
+    document.getElementById("popTxt").innerHTML = "GAME OVER";
     console.log("YOURE SO BAD")
-    resetGame()
+    showGamePop()
 }
 
 function generateUniqueNumbers(x, y) {

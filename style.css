@@ -96,13 +96,11 @@ body{
     -webkit-background-clip: border-box;
 }
 
+
+
 .menu{
     position: absolute;
-}
-
-.score{
     bottom: 0;
-    position: absolute;
 }
 
 .game_title_box{
@@ -118,4 +116,31 @@ body{
     background: var(--gr1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.score{
+    bottom: 32px;
+    padding: 0 40px;
+    width: calc(100% - 40px - 40px);
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score_txt{
+    color: var(--cl3);
+    font-size: 32px;
+}
+
+.lives_box{
+    display: flex;
+}
+
+.lives{
+    background-color: none;
+    margin: 0 0 0 12px;
+    width: 8px;
+    height: 24px;
+    border: 3px solid var(--cl3);
 }

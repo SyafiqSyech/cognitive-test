@@ -6,26 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="chimpstyle.css">
+    <script defer src="../code.js"></script>
     <script defer src="chimpcode.js"></script>
 </head>
 <body>
+    <div class="time_box" id="timeBox"></div>
     <div class="game_title_box"><p class="game_title">CHIMP</p></div>
-    <div class="menu">
-        <button class="start" onclick="resetGame()">Reset</button>
-        <button class="start" onclick="right()">right</button>
+    <div class="pop" id="pop">
+        <p class="desc" id="desc1">LIVES</p>
+        <p class="desc" id="desc2">POINTS</p>
+        <p class="desc" id="desc3">
+            PRESS THE BUTTONS IN ORDER <br>
+            NUMBERS WILL DISAPPEAR WHEN TIMER ENDS <br>
+            MEMORIZE THE NUMBERS
+        </p>
+        <button class="close" onclick="closePop()">CLOSE</button>
     </div>
-    <div class="score">
-        <h1 class="text">Lives</h1>
-        <h2 class="text" id="lives"></h2>
-        <h1 class="text">Level</h1>
-        <h2 class="text" id="level"></h2>
-        <h2 class="text">out of</h2>
-        <h2 class="text" id="maxlevel"></h2>
+    <!-- <div class="menu">
+        <button class="buttons" onclick="resetGame()">Reset</button>
+        <button class="buttons" onclick="right()">right</button>
+    </div> -->
+    <div id="highScoreBox"style="display: none;">
+        <div class="high_score_txt">HIGH SCORE</div>
+        <button class="high_score" id="highScore" onclick="showStart()">0</button>
+    </div>
+    <div class="score" id="score">
+        <p class="score_txt" id="level">0</p>
+        <div class="lives_box">
+            <div class="lives" id="life1" style="background-color: white;"></div>
+            <div class="lives" id="life2" style="background-color: white;"></div>
+            <div class="lives" id="life3" style="background-color: white;"></div>
+        </div>
     </div>
     <div class="pad">
         <a class="pad_txt" href="../index.html">COGNITIVE TEST</a>
         <div class="stuff">
-            <div class="gamebox">
+            <button class="game_pop_button" id="start" onclick="resetGame()">START</button>
+            <button class="game_pop_button" id="next" onclick="closeGamePop()">NEXT</button>
+            <div id="popTxt" style="display: none;">WRONG</div>
+            <div class="gamebox" id="gameBox">
                 <div class="game">
                     <div id="gameGrid" class="game_grid">
                     </div>
