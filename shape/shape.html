@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>shape</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="shapestyle.css">
+    <script defer src="shapecode.js"></script>
+</head>
+<body>
+    <div class="gamebox">
+        <h1 class="text">Lives</h1>
+        <h2 class="text" id="lives"></h2>
+        <h1 class="text">Level</h1>
+        <h2 class="text" id="level"></h2>
+        <h2 class="text">out of</h2>
+        <h2 class="text" id="maxlevel"></h2>
+        <div class="game">
+            <div class="game_sq">
+                <div style="display: none;" id="time" class="time"></div>
+                <div class="game_sq2">
+                    <button style="display: none;" id="gameButton" class="game_button" onclick="buttonPress(0)">Yes</button>
+                    <img id="gameImg" class="game_img" src="shapes/none.png" alt="shape">
+                    <button style="display: none;" id="gameButton" class="game_button" onclick="buttonPress(1)">Nope</button>
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <button class="start" onclick="resetGame()">Reset</button>
+        </div>
+    </div>
+</body>

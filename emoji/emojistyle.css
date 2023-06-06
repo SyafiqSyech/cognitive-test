@@ -69,3 +69,11 @@
 .text{
     text-align: center;
 }
+
+.img_box{
+    display: flex;
+}
+
+.img_box img{
+    width: 10px;
+}

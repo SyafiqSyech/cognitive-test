@@ -1,19 +1,34 @@
-const grid = [8, 5];
+const startingColumn = 4;
+const startingRow = 4;
 const buttonSize = 80;
 const originallevel = 4;
-const maxlevel = 8;
+const maxlevel = 40;
 const originallives = 10;
 
+var grid = [startingColumn, startingRow];
 var level = originallevel;
 var lives = originallives;
 
 function resetGame(){
+    grid = [startingColumn, startingRow];
     level = originallevel;
     lives = originallives;
     document.getElementById("maxlevel").innerHTML = maxlevel-originallevel+1;
 
     updateLevel();
     updateLife();
+
+    startGame();
+}
+
+function startGame(){
+    updateLevel();
+    updateLife();
+
+    if(level > maxlevel){
+        win();
+        return;
+    }
 
     var remBtnContainers = document.querySelectorAll(".btn_container");
     remBtnContainers.forEach((n) => {
@@ -33,18 +48,6 @@ function resetGame(){
         btnContainer.style.margin = Math.round(buttonSize/10)+"px";
         gameGrid.appendChild(btnContainer)
         btnAmount++;
-    }
-
-    startGame();
-}
-
-function startGame(){
-    updateLevel();
-    updateLife();
-
-    if(level > maxlevel){
-        win();
-        return;
     }
 
     now = 0;
@@ -86,7 +89,6 @@ function buttonPress(num){
     gameButton.setAttribute("onclick", null);
     if(now == level){
         right();
-        startGame();
         return;
     }
 }
@@ -102,8 +104,11 @@ function wrong(){
 
 function right(){
     console.log("nice")
-    level++;
+    level++
+    if((level-originallevel+1)%5 == 0) grid[0]++;
+    if((level-originallevel+1)%9 == 0) grid[1]++;
     updateLevel(level);
+    startGame();
 }
 
 function updateLife(){
