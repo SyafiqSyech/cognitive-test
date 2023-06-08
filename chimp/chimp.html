@@ -10,32 +10,34 @@
     <script defer src="chimpcode.js"></script>
 </head>
 <body>
-    <div class="time_box" id="timeBox"></div>
-    <div class="game_title_box"><p class="game_title">CHIMP</p></div>
-    <div class="pop" id="pop">
+    <div class="pop" id="pop" style="display: none;">
         <p class="desc" id="desc1">LIVES</p>
         <p class="desc" id="desc2">POINTS</p>
-        <p class="desc" id="desc3">
-            PRESS THE BUTTONS IN ORDER <br>
-            NUMBERS WILL DISAPPEAR WHEN TIMER ENDS <br>
-            MEMORIZE THE NUMBERS
-        </p>
+        <div id="desc3">
+            <p class="desc">PRESS THE BUTTONS IN ORDER</p>
+            <p class="desc">NUMBERS WILL DISAPPEAR WHEN TIMER ENDS</p>
+            <p class="desc">MEMORIZE THE NUMBERS</p>
+        </div>
+        <button class="button_desc" id="buttonDesc1">1</button>
+        <button class="button_desc" id="buttonDesc2">2</button>
+        <button class="button_desc" id="buttonDesc3">3</button>
+        <button class="button_desc" id="buttonDesc4">4</button>
         <button class="close" onclick="closePop()">CLOSE</button>
     </div>
-    <!-- <div class="menu">
-        <button class="buttons" onclick="resetGame()">Reset</button>
-        <button class="buttons" onclick="right()">right</button>
-    </div> -->
+    <div class="game_title_box"><p class="game_title">CHIMP</p></div>
+    <div class="time_box" id="timeBox"></div>
     <div id="highScoreBox"style="display: none;">
-        <div class="high_score_txt">HIGH SCORE</div>
+        <div class="high_score_txt">SCORE</div>
         <button class="high_score" id="highScore" onclick="showStart()">0</button>
     </div>
     <div class="score" id="score">
         <p class="score_txt" id="level">0</p>
         <div class="lives_box">
-            <div class="lives" id="life1" style="background-color: white;"></div>
-            <div class="lives" id="life2" style="background-color: white;"></div>
-            <div class="lives" id="life3" style="background-color: white;"></div>
+            <div class="lives" id="life1" style="background-color: transparent;"></div>
+            <div class="lives" id="life2" style="background-color: transparent;"></div>
+            <div class="lives" id="life3" style="background-color: transparent;"></div>
+            <div class="lives" id="life4" style="background-color: transparent;"></div>
+            <div class="lives" id="life5" style="background-color: transparent;"></div>
         </div>
     </div>
     <div class="pad">
@@ -43,14 +45,16 @@
         <div class="stuff">
             <button class="game_pop_button" id="start" onclick="resetGame()">START</button>
             <button class="game_pop_button" id="next" onclick="closeGamePop()">NEXT</button>
-            <div id="popTxt" style="display: none;">WRONG</div>
+            <div class="pop_txt_box"><div id="popTxt" style="display: none;"></div></div>
             <div class="gamebox" id="gameBox">
-                <div class="game">
-                    <div id="gameGrid" class="game_grid">
-                    </div>
+                <div id="gameGrid" class="game_grid">
                 </div>
             </div>
         </div>
-        <p class="pad_txt">BY OWEN, DASTIN & SYAFIQ</p>
+        <p class="pad_txt help" onclick="help()">HELP</p>
     </div>
+    <!-- <div class="menu">
+        <button class="buttons" onclick="resetGame()">Reset</button>
+        <button class="buttons" onclick="right()">right</button>
+    </div> -->
 </body>

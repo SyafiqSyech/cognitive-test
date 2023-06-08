@@ -5,8 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
+    <script src="code.js"></script>
 </head>
 <body>
+    <div class="pop" id="pop" style="display: none;">
+        <div id="desc3">
+            <p class="desc">THE PRIMARY OBJECTIVE OF THIS TEST IS TO DETERMINE IF THE PARTICIPANT IS A HUMAN BEING AND NOT AN ALTERNATE ENTITY</p>
+            <p class="desc">THE TEST EVALUATES THE TAKER'S RESPONSES, BEHAVIOR, AND COGNITIVE PATTERNS TO IDENTIFY ANY ANOMALIES THAT MAY INDICATE THE PRESENCE OF NON-HUMAN CHARACTERISTICS</p>
+            <p class="desc">WHILE THIS TEST IS DESIGNED TO ACCURATELY DIFFERENTIATE HUMANS FROM ALTERNATES, IT IS ESSENTIAL TO ACKNOWLEDGE ITS LIMITATIONS. IT MAY NOT BE FOOLPROOF, AND IN CERTAIN CASES, THERE IS A POSSIBILITY OF FALSE POSITIVES OR FALSE NEGATIVES. THEREFORE, ADDITIONAL PRECAUTIONS AND ASSESSMENTS MIGHT BE NECESSARY IN CRITICAL SITUATIONS.</p>
+        </div>
+        <button class="close" onclick="closePop()">CLOSE</button>
+    </div>
     <div class="pad">
         <a class="pad_txt" href="index.html">COGNITIVE TEST</a>
         <div class="stuff">
@@ -22,6 +31,6 @@
                 </div></a>
             </div>
         </div>
-        <p class="pad_txt">BY OWEN, DASTIN & SYAFIQ</p>
+        <p class="pad_txt help" onclick="help()">ABOUT</p>
     </div>
 </body>

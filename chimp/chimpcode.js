@@ -2,12 +2,13 @@ const startingColumn = 4;
 const startingRow = 4;
 const buttonSize = 80;
 const originallevel = 4;
+const originallives = 5;
 const maxlevel = 40;
 
 var grid = [startingColumn, startingRow];
 var level = originallevel;
-var time = level*5000;
-var lives = 3;
+var time = null;
+var lives = originallives;
 var timeout = null;
 
 function closeGamePop(){
@@ -35,13 +36,15 @@ function showStart(){
     document.getElementById("start").style.display = "block";
     document.getElementById("highScoreBox").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
+    level = originallevel
+    updateLevel()
 }
 
 function resetGame(){
     grid = [startingColumn, startingRow];
     level = originallevel;
     time = level*1000;
-    lives = 3;
+    lives = originallives;
 
     updateLevel();
     updateLife();
@@ -55,7 +58,7 @@ function startGame(){
     updateLevel();
     updateLife();
 
-    time = level*1000
+    time = (level+(level-originallevel))*1000
 
     var remBtnContainers = document.querySelectorAll(".btn_container");
     remBtnContainers.forEach((n) => {
@@ -106,13 +109,9 @@ function timer(){
     }, time);
 }
 
-function stopTimeoutDisplay(){
-    document.getElementById("timeBox").style.animation = "none"
-}
-
 function hideButton(){
     clearTimeout(timeout)
-    stopTimeoutDisplay()
+    document.getElementById("timeBox").style.animation = "none"
     var allGameButtons = document.querySelectorAll(".game_button");
     allGameButtons.forEach((n) => {
         n.innerHTML = "";
@@ -130,8 +129,7 @@ function buttonPress(num){
         return;
     }
     const gameButton = document.getElementById("gameButton"+num);
-    gameButton.style.opacity = 0;
-    gameButton.setAttribute("onclick", null);
+    gameButton.remove()
     if(now == level){
         right();
         return;
@@ -139,7 +137,7 @@ function buttonPress(num){
 }
 
 function wrong(){
-    document.getElementById("popTxt").innerHTML = "WRONG";
+    popTxtDisplay(-1)
     console.log("WRONG")
     lives--;
     updateLife();
@@ -151,7 +149,7 @@ function wrong(){
 }
 
 function right(){
-    document.getElementById("popTxt").innerHTML = "NICE";
+    popTxtDisplay(1)
     console.log("nice")
     level++
     if((level-originallevel+1)%5 == 0) grid[0]++;
@@ -163,22 +161,34 @@ function right(){
 }
 
 function updateLife(){
-    if(lives == 3){
+    if(lives >= 5){
+        document.getElementById("life5").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life5").style.backgroundColor = "transparent";
+    }
+    
+    if(lives >= 4){
+        document.getElementById("life4").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life4").style.backgroundColor = "transparent";
+    }
+
+    if(lives >= 3){
         document.getElementById("life3").style.backgroundColor = "white";
     } else {
-        document.getElementById("life3").style.backgroundColor = "var(--cl1)";
+        document.getElementById("life3").style.backgroundColor = "transparent";
     }
     
     if(lives >= 2){
         document.getElementById("life2").style.backgroundColor = "white";
     } else {
-        document.getElementById("life2").style.backgroundColor = "var(--cl1)";
+        document.getElementById("life2").style.backgroundColor = "transparent";
     }
     
     if(lives >= 1){
         document.getElementById("life1").style.backgroundColor = "white";
     } else {
-        document.getElementById("life1").style.backgroundColor = "var(--cl1)";
+        document.getElementById("life1").style.backgroundColor = "transparent";
     }
 }
 
@@ -193,7 +203,7 @@ function win(){
 }
 
 function lose(){
-    document.getElementById("popTxt").innerHTML = "GAME OVER";
+    popTxtDisplay(0)
     console.log("YOURE SO BAD")
     showGamePop()
 }

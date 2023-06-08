@@ -1,98 +1,163 @@
-const maxlevel = 28;
 const originallives = 3;
 const shapes = 100;
-const timerSeconds = 10000;
-const timerDelay = 1000;
+const newshape = 25;
+const timerSeconds = 12000;
 
 var level = 1;
+var points = 0;
 var lives = originallives;
+var timeout = null;
+var timeoutDisplay = null;
+var order = [];
+var neworder = [];
 
 var gameButtons = document.querySelectorAll(".game_button");
+const load = document.getElementById("load");
+const gameImg = document.getElementById("gameImg");
 
-var order = [];
+function closeGamePop(){
+    document.getElementById("gameBox").style.display = "flex";
+    document.getElementById("start").style.display = "none";
+}
+
+function showGamePop(){
+    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("gameBox").style.display = "none";
+    document.getElementById("popTxt").style.display = "block";
+    document.getElementById("highScore").innerHTML = points;
+    document.getElementById("highScoreBox").style.display = "block";
+}
+
+function showStart(){
+    document.getElementById("start").style.display = "block";
+    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("popTxt").style.display = "none";
+    points = 0;
+    updatePoints()
+    neworder = generateUniqueNumbers(newshape, shapes);
+    load.src = "shapes/s ("+neworder[0]+").png";
+}
+showStart();
+
 function resetGame(){
     lives = originallives;
     level = 1;
-    startGame();
-    order = generateUniqueNumbers(shapes, shapes);
-    
-    const time = document.getElementById("time");
-    time.style.display = "block";
+    points = 0;
 
+    startGame();
+    
+    closeGamePop();
 }
 
 function startGame(){
-    document.getElementById("maxlevel").innerHTML = maxlevel;
+
+    console.log(level)
     
-    updateLevel();
+    updatePoints();
     updateLife();
     
-    if(level > maxlevel) win();
-
-    gameButtons.forEach((n) => { n.style.display = "none"; })
+    if(lives == 0){
+        lose()
+        return
+    }
     
-    const time = document.getElementById("time");
-    time.style.animation = "none";
-    setTimeout(() => {
-        const gameImg = document.getElementById("gameImg");
-        gameImg.src = "shapes/s ("+order[level-1]+").png";
-        gameButtons.forEach((n) => { n.style.display = "block"; })
-        time.style.animation = "timer "+timerSeconds/1000+"s linear";
-    }, timerDelay);
-
-    timer(level)
+    if(level%newshape == 1) order = neworder
+    if(level%newshape == 0){
+        neworder = generateUniqueNumbers(newshape, shapes);
+        load.src = "shapes/s ("+neworder[0]+").png";
+    } else {
+        load.src = "shapes/s ("+order[level%newshape]+").png";
+    }
+    gameImg.src = "shapes/s ("+order[(level-1)%newshape]+").png";
+    timer()
 }
 
-function timer(n){
-    setTimeout(() => {
-        if(level == n){
-            wrong();
+function timer(){
+    timeoutDisplay = setTimeout(() => {
+        document.getElementById("timeBox").style.animation = "timer "+timerSeconds/1000+"s linear 1"
+    }, 1);
+    timeout = setTimeout(() => {
+        console.log("timeout")
+        buttonPress(-1);
+    }, timerSeconds);
+}
 
-            level++;
-            updateLevel();
-
-            startGame();
-        }
-    }, timerSeconds+timerDelay);
+function stopTimeoutDisplay(){
+    document.getElementById("timeBox").style.animation = "none"
 }
 
 function buttonPress(n){
-    if(n == 1 && order[level-1] <= (shapes/2)) wrong();
-    else if(n == 0 && order[level-1] > (shapes/2)) wrong();
+    clearTimeout(timeout)
+    document.getElementById("timeBox").style.animation = "none"
+    
+    if(n == -1) wrong()
+    else if(n == 1 && order[(level-1)%newshape] <= (shapes/2)) wrong();
+    else if(n == 0 && order[(level-1)%newshape] > (shapes/2)) wrong();
     else right();
     
     level++;
-    updateLevel();
+    updatePoints();
     
     startGame();
 }
 
 function wrong(){
+    lives--
     console.log("WRONG")
 }
 
 function right(){
+    points++
     console.log("yess")
 }
 
 function updateLife(){
-    const livesText = document.getElementById("lives");
-    livesText.innerHTML = lives;
+    if(lives >= 5){
+        document.getElementById("life5").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life5").style.backgroundColor = "transparent";
+    }
+    
+    if(lives >= 4){
+        document.getElementById("life4").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life4").style.backgroundColor = "transparent";
+    }
+
+    if(lives >= 3){
+        document.getElementById("life3").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life3").style.backgroundColor = "transparent";
+    }
+    
+    if(lives >= 2){
+        document.getElementById("life2").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life2").style.backgroundColor = "transparent";
+    }
+    
+    if(lives >= 1){
+        document.getElementById("life1").style.backgroundColor = "white";
+    } else {
+        document.getElementById("life1").style.backgroundColor = "transparent";
+    }
 }
 
-function updateLevel(){
-    const levelText = document.getElementById("level");
-    levelText.innerHTML = level;
+function updatePoints(){
+    const pointsText = document.getElementById("points");
+    pointsText.innerHTML = points;
 }
 
 function win(){
+    document.getElementById("popTxt").innerHTML = "GAME WIN";
     console.log("You Win")
-    resetGame()
+    showGamePop()
 }
 
 function lose(){
+    popTxtDisplay(0)
     console.log("YOURE SO BAD")
-    resetGame()
+    showGamePop()
 }
 
 function generateUniqueNumbers(x, y) {

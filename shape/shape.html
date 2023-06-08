@@ -4,29 +4,64 @@
     <title>shape</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="shapestyle.css">
+    <script defer src="../code.js"></script>
     <script defer src="shapecode.js"></script>
 </head>
 <body>
-    <div class="gamebox">
-        <h1 class="text">Lives</h1>
-        <h2 class="text" id="lives"></h2>
-        <h1 class="text">Level</h1>
-        <h2 class="text" id="level"></h2>
-        <h2 class="text">out of</h2>
-        <h2 class="text" id="maxlevel"></h2>
-        <div class="game">
-            <div class="game_sq">
-                <div style="display: none;" id="time" class="time"></div>
-                <div class="game_sq2">
-                    <button style="display: none;" id="gameButton" class="game_button" onclick="buttonPress(0)">Yes</button>
-                    <img id="gameImg" class="game_img" src="shapes/none.png" alt="shape">
-                    <button style="display: none;" id="gameButton" class="game_button" onclick="buttonPress(1)">Nope</button>
-                </div>
-            </div>
+    <div class="pop" id="pop" style="display: none;">
+        <p class="desc" id="desc1">LIVES</p>
+        <p class="desc" id="desc2">POINTS</p>
+        <div id="desc3">
+            <p class="desc">DECIDE IF THE DIAGRAM CAN MAKE A SHAPE</p>
+            <p class="desc">DECIDE BEFORE THE TIMER ENDS</p>
+            <p class="desc">THESE ARE THE SHAPES THAT CAN BE MADE</p>
         </div>
-        <div class="menu">
-            <button class="start" onclick="resetGame()">Reset</button>
+        <img src="shapes/3d (1).png" class="desc_shape" id="descShape1">
+        <img src="shapes/3d (2).png" class="desc_shape" id="descShape2">
+        <img src="shapes/3d (3).png" class="desc_shape" id="descShape3">
+        <img src="shapes/3d (4).png" class="desc_shape" id="descShape4">
+        <img src="shapes/3d (5).png" class="desc_shape" id="descShape5">
+        <img src="shapes/3d (6).png" class="desc_shape" id="descShape6">
+        <img src="shapes/3d (7).png" class="desc_shape" id="descShape7">
+        <img src="shapes/3d (8).png" class="desc_shape" id="descShape8">
+        <img src="shapes/3d (9).png" class="desc_shape" id="descShape9">
+        <img src="shapes/3d (10).png" class="desc_shape" id="descShape10">
+        <button class="close" onclick="closePop()">CLOSE</button>
+    </div>
+    <div class="time_box" id="timeBox"></div>
+    <div class="game_title_box"><p class="game_title">SHAPE</p></div>
+    <div class="score" id="score">
+        <p class="score_txt" id="points">0</p>
+        <div class="lives_box">
+            <div class="lives" id="life1" style="background-color: transparent;"></div>
+            <div class="lives" id="life2" style="background-color: transparent;"></div>
+            <div class="lives" id="life3" style="background-color: transparent;"></div>
+            <div class="lives" id="life4" style="background-color: transparent; display: none;"></div>
+            <div class="lives" id="life5" style="background-color: transparent; display: none;"></div>
         </div>
     </div>
+    <div id="highScoreBox"style="display: none;">
+        <div class="high_score_txt">SCORE</div>
+        <button class="high_score" id="highScore" onclick="showStart()">0</button>
+    </div>
+    <img id="load" style="display: none;" src="" alt="">
+    <div class="pad">
+        <a class="pad_txt" href="../index.html">COGNITIVE TEST</a>
+        <div class="stuff">
+            <button class="game_pop_button" id="start" onclick="resetGame()">START</button>
+            <div class="pop_txt_box"><div id="popTxt" style="display: none;"></div></div>
+            <div class="gamebox" id="gameBox" style="display: none;">
+                <button style="display: block;" id="gameButton" class="game_button" onclick="buttonPress(0)">YUP</button>
+                <img id="gameImg" class="game_img" src="shapes/none.png" alt="shape">
+                <button style="display: block;" id="gameButton" class="game_button" onclick="buttonPress(1)">NAH</button>
+            </div>
+        </div>
+        <p class="pad_txt help" onclick="help()">HELP</p>
+    </div>
+    <!-- <div class="menu">
+        <button class="buttons" onclick="resetGame()">Reset</button>
+        <button class="buttons" onclick="stopTimeoutDisplay()">Stop</button>
+    </div> -->
 </body>

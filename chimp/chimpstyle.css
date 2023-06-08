@@ -1,58 +1,8 @@
-*{
-    margin: 0;
-    padding: 0;
+.game_title{
+    background: var(--gr1);
+    -webkit-background-clip: text;
 }
 
-.pop{
-    position: absolute;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100vw;
-    height: 100vh;
-}
-
-.close{
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--cl3);
-    background-color: transparent;
-    color: var(--cl3);
-    cursor: pointer;
-}
-
-.close:hover{
-    background-color: var(--cl3);
-    color: var(--cl1);
-}
-
-.desc{
-    text-align: center;
-    font-size: 12px;
-    color: var(--cl3);
-}
-
-#desc1{
-    position: absolute;
-    bottom: 75px;
-    right: 47px;
-}
-
-#desc2{
-    position: absolute;
-    bottom: 75px;
-    left: 22px;
-}
-
-#desc3{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--cl1);
-}
 
 
 .gamebox{
@@ -65,11 +15,8 @@
 }
 
 .game_grid{
-    width: calc(2 * 100px);
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(2, 100px);
-    grid-template-rows: repeat(2, 100px);
 }
 
 .btn_container{
@@ -118,66 +65,43 @@
     display: none;
 }
 
-#popTxt{
-    color: rgba(255, 255, 255, 0.1);
-    width: 100vw;
-    text-align: center;
-    font-size: 250px;
-    z-index: -1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-.high_score_txt{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, calc(-50% - 100px));
-    text-align: center;
-    color: var(--cl3);
-}
 
-.high_score{
+.button_desc{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 120px;
-    width: 120px;
-    text-align: center;
-    border: 4px solid var(--cl3);
+    width: calc(14px*6);
+    height: calc(14px*6);
+    border: calc(1px*6) solid var(--cl4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(6px*6);
+    font-weight: bolder;
     background-color: transparent;
-    color: var(--cl3);
-    cursor: pointer;
-    font-size: 50px;
+    color: var(--cl4);
 }
 
-.high_score:hover{
+.button_desc:hover{
+    background-color: var(--cl4);
     color: var(--cl1);
-    background-color: var(--cl3);
 }
 
-
-
-@keyframes timer {
-    from{ width: 0px; }
-    to{ width: 100vw; }
+#buttonDesc1{
+    top: 150px;
+    left: 25%;
 }
 
-.time_box{
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.1);
-    width: 0;
-    height: 100vh;
-    z-index: -1;
+#buttonDesc2{
+    top: 150px;
+    right: 25%;
 }
 
+#buttonDesc3{
+    bottom: 150px;
+    left: 25%;
+}
 
-
-.buttons{
-    background-color: var(--cl2);
-    color: var(--cl1);
-    padding: 20px;
+#buttonDesc4{
+    bottom: 150px;
+    right: 25%;
 }

@@ -4,25 +4,63 @@
     <title>emoji</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="emojistyle.css">
+    <script defer src="../code.js"></script>
     <script defer src="emojicode.js"></script>
 </head>
-<body id="body">
-    <div class="gamebox">
-        <h1 class="text">Lives</h1>
-        <h2 class="text" id="lives"></h2>
-        <h1 class="text">Level</h1>
-        <h2 class="text" id="level"></h2>
-        <h2 class="text">out of</h2>
-        <h2 class="text" id="maxlevel"></h2>
-        <div class="game">
-            <div id="gameGrid" class="game_grid">
-            </div>
+<body>
+    <div class="pop" id="pop" style="display: none;">
+        <p class="desc" id="desc1">LIVES</p>
+        <p class="desc" id="desc2">POINTS</p>
+        <div id="desc3">
+            <p class="desc">MEMORIZE THE EMOJIS POSITION</p>
+            <p class="desc">FLASHING CELLS MEANS THEY'RE SWITCHING</p>
+            <p class="desc">PICK THE CORRESPONDING EMOJI</p>
         </div>
-        <div class="menu">
-            <button class="start" onclick="resetGame()">Reset</button>
-            <button class="start" onclick="buttonPress(Math.floor(Math.random() * 1000)+ 100)">Right</button>
+        <img class="emoji_desc" id="emojiDesc1" src="emojis/e (1).png" alt="">
+        <img class="emoji_desc" id="emojiDesc2" src="emojis/e (2).png" alt="">
+        <img class="emoji_desc" id="emojiDesc3" src="emojis/e (3).png" alt="">
+        <img class="emoji_desc" id="emojiDesc4" src="emojis/e (4).png" alt="">
+        <img class="emoji_desc" id="emojiDesc5" src="emojis/e (5).png" alt="">
+        <img class="emoji_desc" id="emojiDesc6" src="emojis/e (6).png" alt="">
+        <img class="emoji_desc" id="emojiDesc7" src="emojis/e (7).png" alt="">
+        <button class="close" onclick="closePop()">CLOSE</button>
+    </div>
+    <div class="game_title_box"><p class="game_title">EMOJI</p></div>
+    <div class="time_box" id="timeBox"></div>
+    <div id="highScoreBox"style="display: none;">
+        <div class="high_score_txt">SCORE</div>
+        <button class="high_score" id="highScore" onclick="showStart()">0</button>
+    </div>
+    <div class="score" id="score">
+        <p class="score_txt" id="level">0</p>
+        <div class="lives_box">
+            <div class="lives" id="life1" style="background-color: transparent;"></div>
+            <div class="lives" id="life2" style="background-color: transparent;"></div>
+            <div class="lives" id="life3" style="background-color: transparent;"></div>
+            <div class="lives" id="life4" style="background-color: transparent;"></div>
+            <div class="lives" id="life5" style="background-color: transparent; display: none;"></div>
         </div>
     </div>
-    <div id="imgBox" class="img_box"></div>
+    <div class="pad">
+        <a class="pad_txt" href="../index.html">COGNITIVE TEST</a>
+        <div class="stuff">
+            <button class="game_pop_button" id="start" onclick="resetGame()">START</button>
+            <button class="game_pop_button" id="next" onclick="closeGamePop()">NEXT</button>
+            <div class="pop_txt_box"><div id="popTxt" style="display: none;"></div></div>
+            <div class="emoji_ans_box">
+                <img style="display: none;" src="" alt="" class="emoji_ans">
+                <img style="display: none;" src="" alt="" class="emoji_ans">
+            </div>
+            <div class="gamebox" id="gameBox" style="display: none;">
+                <div id="gameGrid" class="game_grid">
+                </div>
+            </div>
+        </div>
+        <p class="pad_txt help" onclick="help()">HELP</p>
+    </div>
+    <!-- <div class="menu">
+        <button class="buttons" onclick="resetGame()">Reset</button>
+    </div> -->
 </body>
