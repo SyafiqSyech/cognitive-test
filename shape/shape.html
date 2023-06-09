@@ -30,7 +30,8 @@
         <img src="shapes/3d (10).png" class="desc_shape" id="descShape10">
         <button class="close" onclick="closePop()">CLOSE</button>
     </div>
-    <div class="time_box" id="timeBox"></div>
+    <div class="time_box" id="timeBox1"></div>
+    <div class="time_box" id="timeBox2"></div>
     <div class="game_title_box"><p class="game_title">SHAPE</p></div>
     <div class="score" id="score">
         <p class="score_txt" id="points">0</p>
@@ -38,8 +39,8 @@
             <div class="lives" id="life1" style="background-color: transparent;"></div>
             <div class="lives" id="life2" style="background-color: transparent;"></div>
             <div class="lives" id="life3" style="background-color: transparent;"></div>
-            <div class="lives" id="life4" style="background-color: transparent; display: none;"></div>
-            <div class="lives" id="life5" style="background-color: transparent; display: none;"></div>
+            <div class="lives" id="life4" style="background-color: transparent;"></div>
+            <div class="lives" id="life5" style="background-color: transparent;"></div>
         </div>
     </div>
     <div id="highScoreBox"style="display: none;">
@@ -54,7 +55,7 @@
             <div class="pop_txt_box"><div id="popTxt" style="display: none;"></div></div>
             <div class="gamebox" id="gameBox" style="display: none;">
                 <button style="display: block;" id="gameButton" class="game_button" onclick="buttonPress(0)">YUP</button>
-                <img id="gameImg" class="game_img" src="shapes/none.png" alt="shape">
+                <img id="gameImg" class="game_img" src="" alt="shape">
                 <button style="display: block;" id="gameButton" class="game_button" onclick="buttonPress(1)">NAH</button>
             </div>
         </div>
@@ -63,5 +64,6 @@
     <!-- <div class="menu">
         <button class="buttons" onclick="resetGame()">Reset</button>
         <button class="buttons" onclick="stopTimeoutDisplay()">Stop</button>
+        <button class="buttons" onclick="right()">right</button>
     </div> -->
 </body>

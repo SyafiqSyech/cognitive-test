@@ -1,6 +1,6 @@
 const maxlevel = 100;
 const originallives = 4;
-const originaltime = 1.5;
+const originaltime = 1;
 const emojiCountLevel = 4;
 const cells = 7;
 
@@ -50,7 +50,6 @@ function closeGamePop(){
 function showGamePop(){
     document.getElementById("highScoreBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
-    document.getElementById("popTxt").style.display = "block";
     if(lives == 0 || level > maxlevel){
         document.getElementById("next").style.display = "none";
         document.getElementById("highScore").innerHTML = level-1;
@@ -86,9 +85,9 @@ function startGame(){
 
     switchTime = originaltime*1000;
     for(var i = 0; i < level; i++){
-        switchTime = switchTime-switchTime/20;
+        switchTime = switchTime-switchTime/25;
     }    
-    emojiAmount = (Math.floor((level+emojiCountLevel-2)/emojiCountLevel))+1;
+    emojiAmount = level > 25 ? 7 : (Math.floor((level+emojiCountLevel-2)/emojiCountLevel))+1;
 
     emojiArrPhoto = generateUniqueNumbers(emojiAmount, cells);
     ansPhoto = emojiArrPhoto[0];
@@ -100,9 +99,9 @@ function startGame(){
     var switchesTemp = generateUniqueCouples(ansSwitch, cells, firstPos);
     ans = switchesTemp[switchesTemp.length-1][1]
     switches = insertUniqueCouples(switchesTemp, level-ansSwitch, cells);
-    
-    // console.log(switchesTemp)
-    // console.log(switches)
+
+    console.log(emojiAmount)
+    console.log(level)
     console.log(ans)
     
     showImg()
@@ -181,8 +180,33 @@ function buttonPress(n) {
 
     if(n != ans) wrong()
     else right()
+    // document.getElementById("popTxt").style.display = "none";
+
+    // setTimeout(() => {
+    //     document.getElementById("popTxt").style.display = "block";
+    //     const remGameImg = document.getElementById("gameImg");
+    //     if(remGameImg != null) remGameImg.remove();
+    //     emojiAns.forEach((n) =>{
+    //         n.style.display = "none";
+    //     })
+        
+    //     if(lives == 0) lose()
+    //     if(level == maxlevel) win()
+
+    //     showGamePop();
+    // }, originaltime*500);
+}
+
+function wrong() {
+    console.log("WRONG")
+    popTxtDisplay(-1)
+    lives--;
+    updateLife()
+
+    document.getElementById("popTxt").style.display = "none";
 
     setTimeout(() => {
+        document.getElementById("popTxt").style.display = "block";
         const remGameImg = document.getElementById("gameImg");
         if(remGameImg != null) remGameImg.remove();
         emojiAns.forEach((n) =>{
@@ -196,19 +220,27 @@ function buttonPress(n) {
     }, originaltime*500);
 }
 
-function wrong() {
-    popTxtDisplay(-1)
-    console.log("WRONG")
-    lives--;
-    updateLife()
-    console.log(lives)
-}
-
 function right() {
+    console.log("Right")
     popTxtDisplay(1)
-    console.log("nice")
     level++;
     updateLevel()
+
+    document.getElementById("popTxt").style.display = "none";
+
+    setTimeout(() => {
+        document.getElementById("popTxt").style.display = "block";
+        const remGameImg = document.getElementById("gameImg");
+        if(remGameImg != null) remGameImg.remove();
+        emojiAns.forEach((n) =>{
+            n.style.display = "none";
+        })
+        
+        if(lives == 0) lose()
+        if(level == maxlevel) win()
+
+        showGamePop();
+    }, originaltime*500);
 }
 
 function updateLife(){

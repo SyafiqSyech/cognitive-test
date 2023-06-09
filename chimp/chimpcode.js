@@ -2,7 +2,7 @@ const startingColumn = 4;
 const startingRow = 4;
 const buttonSize = 80;
 const originallevel = 4;
-const originallives = 5;
+const originallives = 3;
 const maxlevel = 40;
 
 var grid = [startingColumn, startingRow];
@@ -22,7 +22,6 @@ function closeGamePop(){
 function showGamePop(){
     document.getElementById("highScoreBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
-    document.getElementById("popTxt").style.display = "block";
     if(lives == 0 || level > maxlevel){
         document.getElementById("next").style.display = "none";
         document.getElementById("highScore").innerHTML = level - originallevel;
@@ -104,7 +103,6 @@ function startGame(){
 function timer(){
     document.getElementById("timeBox").style.animation = "timer "+time/1000+"s linear 1"
     timeout = setTimeout(() => {
-        console.log("henlos")
         hideButton()
     }, time);
 }
@@ -137,8 +135,8 @@ function buttonPress(num){
 }
 
 function wrong(){
-    popTxtDisplay(-1)
     console.log("WRONG")
+    popTxtDisplay(-1)
     lives--;
     updateLife();
     if(lives == 0){
@@ -149,8 +147,8 @@ function wrong(){
 }
 
 function right(){
+    console.log("Right")
     popTxtDisplay(1)
-    console.log("nice")
     level++
     if((level-originallevel+1)%5 == 0) grid[0]++;
     if((level-originallevel+1)%8 == 0) grid[1]++;

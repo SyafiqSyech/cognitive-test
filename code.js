@@ -7,7 +7,7 @@ const wrongMsg = [
     "CRINGE",
     "IMPOSTOR",
     "BRUH MOMENT",
-    "L + RATIO + YOU FELL OFF + DIDN'T ASKED + NO MAIDENS",
+    "L + RATIO + YOU FELL OFF<br>+ DIDN'T ASKED + NO MAIDENS",
 ]
 
 const rightMsg = [
@@ -31,16 +31,6 @@ const gameoverMsg = [
     "[custom] MISSION FAILED",
 ]
 
-function closePop(){
-    const pop = document.getElementById("pop");
-    pop.style.display = "none";
-}
-
-function help(){
-    const pop = document.getElementById("pop");
-    pop.style.display = "block";
-}
-
 var fw = 0;
 var fr = 0;
 var fg = 0;
@@ -48,6 +38,14 @@ function popTxtDisplay(n){
     var msg = null
     if(n == -1) {
         var m = fw == 1 ? Math.floor(Math.random() * wrongMsg.length) : 0;
+        if(m == 8){
+            msg = wrongMsg[m]
+            const popTxt = document.getElementById("popTxt");
+            popTxt.innerHTML = msg
+            popTxt.style.fontSize = (window.innerWidth*6/100)+"px";
+            document.getElementById("popTxt").style.display = "block";
+            return
+        }
         msg = wrongMsg[m];
         fw = 1;
     }
@@ -58,7 +56,7 @@ function popTxtDisplay(n){
             popTxt.innerHTML = "";
             var img = document.createElement("img")
             img.src = "../img/roblox.jpg";
-            img.style.width = "calc(100vw - 600px)";
+            img.style.width = "calc(100vw*50/100)";
             img.style.opacity = "0.1";
             popTxt.appendChild(img)
             document.getElementById("popTxt").style.display = "block";
@@ -74,10 +72,10 @@ function popTxtDisplay(n){
             const popTxt = document.getElementById("popTxt");
             popTxt.innerHTML = msg;
             var p = document.createElement("p")
-            p.style = "font-size: 110px; color: var(--cl7);text-align: center;"
+            p.style = "font-size: "+window.innerWidth*7.5/100+"px; color: var(--cl7);text-align: center;"
             p.innerHTML = "WE'LL GET EM NEXT TIME";
             popTxt.appendChild(p)
-            popTxt.style.fontSize = 168 + 'px';
+            popTxt.style.fontSize = window.innerWidth*11.6/100 + 'px';
             document.getElementById("popTxt").style.display = "block";
             return
         }
@@ -86,8 +84,7 @@ function popTxtDisplay(n){
             popTxt.innerHTML = "";
             var img = document.createElement("img")
             img.src = "../img/youdied.jpg";
-            img.style.width = "calc(100vw - 600px)";
-            img.style.transform = "translateY(-35px)";
+            img.style.width = "calc(100vw*50/100)";
             popTxt.appendChild(img)
             document.getElementById("popTxt").style.display = "block";
             return
@@ -95,17 +92,25 @@ function popTxtDisplay(n){
         msg = gameoverMsg[m];
         fg = 1;
     }
-    console.log(m)
-    console.log(msg)
     const popTxt = document.getElementById("popTxt");
     popTxt.innerHTML = msg
     document.getElementById("popTxt").style.display = "block";
     
-    var fontSize = 250;
+    var fontSize = window.innerWidth*17/100;
     popTxt.style.fontSize = fontSize + 'px';
     
     while (popTxt.offsetWidth > window.innerWidth - 100) {
         fontSize -= 2;
         popTxt.style.fontSize = fontSize + 'px';
     }
+}
+
+function closePop(){
+    const pop = document.getElementById("pop");
+    pop.style.display = "none";
+}
+
+function help(){
+    const pop = document.getElementById("pop");
+    pop.style.display = "block";
 }

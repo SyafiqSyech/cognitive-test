@@ -1,15 +1,17 @@
-const originallives = 3;
+const originallives = 5;
 const shapes = 100;
 const newshape = 25;
-const timerSeconds = 12000;
+const originaltime = 2000;
 
 var level = 1;
+var timerSeconds = level*originaltime;
 var points = 0;
 var lives = originallives;
 var timeout = null;
 var timeoutDisplay = null;
 var order = [];
 var neworder = [];
+var timeBox = 1;
 
 var gameButtons = document.querySelectorAll(".game_button");
 const load = document.getElementById("load");
@@ -23,7 +25,6 @@ function closeGamePop(){
 function showGamePop(){
     document.getElementById("highScoreBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
-    document.getElementById("popTxt").style.display = "block";
     document.getElementById("highScore").innerHTML = points;
     document.getElementById("highScoreBox").style.display = "block";
 }
@@ -42,17 +43,18 @@ showStart();
 function resetGame(){
     lives = originallives;
     level = 1;
+    timerSeconds = level*originaltime
     points = 0;
-
+    timeBox = 1;
+    
     startGame();
     
     closeGamePop();
 }
 
 function startGame(){
+    console.log(timeBox)
 
-    console.log(level)
-    
     updatePoints();
     updateLife();
     
@@ -69,26 +71,35 @@ function startGame(){
         load.src = "shapes/s ("+order[level%newshape]+").png";
     }
     gameImg.src = "shapes/s ("+order[(level-1)%newshape]+").png";
+    var deg = (Math.floor(Math.random() * 8))*45;
+    gameImg.style.transform = "rotate("+deg+"deg)";
     timer()
 }
 
 function timer(){
-    timeoutDisplay = setTimeout(() => {
-        document.getElementById("timeBox").style.animation = "timer "+timerSeconds/1000+"s linear 1"
-    }, 1);
+    if(timeBox == 1){
+        document.getElementById("timeBox2").style.animation = "timer "+timerSeconds/1000+"s linear 1"
+        timeBox = 2
+    } else {
+        document.getElementById("timeBox1").style.animation = "timer "+timerSeconds/1000+"s linear 1"
+        timeBox = 1
+    }
     timeout = setTimeout(() => {
-        console.log("timeout")
         buttonPress(-1);
     }, timerSeconds);
 }
 
 function stopTimeoutDisplay(){
-    document.getElementById("timeBox").style.animation = "none"
+    if(timeBox == 1){
+        document.getElementById("timeBox1").style.animation = "none"
+    } else {
+        document.getElementById("timeBox2").style.animation = "none"
+    }
 }
 
 function buttonPress(n){
     clearTimeout(timeout)
-    document.getElementById("timeBox").style.animation = "none"
+    stopTimeoutDisplay()
     
     if(n == -1) wrong()
     else if(n == 1 && order[(level-1)%newshape] <= (shapes/2)) wrong();
@@ -96,19 +107,20 @@ function buttonPress(n){
     else right();
     
     level++;
-    updatePoints();
-    
     startGame();
 }
 
 function wrong(){
-    lives--
     console.log("WRONG")
+    lives--
+    updateLife();
 }
 
 function right(){
+    console.log("Right")
     points++
-    console.log("yess")
+    updatePoints();
+    timerSeconds = timerSeconds - (timerSeconds/30)
 }
 
 function updateLife(){

@@ -7,8 +7,6 @@
 
 .gamebox{
     margin: auto;
-    width: 624px;
-    height: 464px;
     display: flex;
     justify-content: center;
     align-items: center;
