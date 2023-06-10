@@ -1,7 +1,7 @@
 const originallives = 5;
 const shapes = 100;
 const newshape = 25;
-const originaltime = 2000;
+const originaltime = 12000;
 
 var level = 1;
 var timerSeconds = level*originaltime;
