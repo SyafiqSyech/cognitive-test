@@ -48,12 +48,12 @@ function closeGamePop(){
 }
 
 function showGamePop(){
-    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("pointBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
     if(lives == 0 || level > maxlevel){
         document.getElementById("next").style.display = "none";
-        document.getElementById("highScore").innerHTML = level-1;
-        document.getElementById("highScoreBox").style.display = "block";
+        document.getElementById("point").innerHTML = level-1;
+        document.getElementById("pointBox").style.display = "block";
         return
     }
     document.getElementById("next").style.display = "block";
@@ -61,7 +61,7 @@ function showGamePop(){
 
 function showStart(){
     document.getElementById("start").style.display = "block";
-    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("pointBox").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
     level = originallevel
     updateLevel()
@@ -180,31 +180,11 @@ function buttonPress(n) {
 
     if(n != ans) wrong()
     else right()
-    // document.getElementById("popTxt").style.display = "none";
-
-    // setTimeout(() => {
-    //     document.getElementById("popTxt").style.display = "block";
-    //     const remGameImg = document.getElementById("gameImg");
-    //     if(remGameImg != null) remGameImg.remove();
-    //     emojiAns.forEach((n) =>{
-    //         n.style.display = "none";
-    //     })
-        
-    //     if(lives == 0) lose()
-    //     if(level == maxlevel) win()
-
-    //     showGamePop();
-    // }, originaltime*500);
 }
 
-function wrong() {
-    console.log("WRONG")
-    popTxtDisplay(-1)
-    lives--;
-    updateLife()
-
+function buttonPressCont(){
     document.getElementById("popTxt").style.display = "none";
-
+    
     setTimeout(() => {
         document.getElementById("popTxt").style.display = "block";
         const remGameImg = document.getElementById("gameImg");
@@ -215,9 +195,20 @@ function wrong() {
         
         if(lives == 0) lose()
         if(level == maxlevel) win()
-
+    
         showGamePop();
     }, originaltime*500);
+}
+
+function wrong() {
+    dataEmoji.push(level-1)
+
+    console.log("WRONG")
+    popTxtDisplay(-1)
+    lives--;
+    updateLife()
+
+    buttonPressCont()
 }
 
 function right() {
@@ -225,22 +216,8 @@ function right() {
     popTxtDisplay(1)
     level++;
     updateLevel()
-
-    document.getElementById("popTxt").style.display = "none";
-
-    setTimeout(() => {
-        document.getElementById("popTxt").style.display = "block";
-        const remGameImg = document.getElementById("gameImg");
-        if(remGameImg != null) remGameImg.remove();
-        emojiAns.forEach((n) =>{
-            n.style.display = "none";
-        })
-        
-        if(lives == 0) lose()
-        if(level == maxlevel) win()
-
-        showGamePop();
-    }, originaltime*500);
+    
+    buttonPressCont()
 }
 
 function updateLife(){
@@ -288,6 +265,11 @@ function win(){
 function lose(){
     popTxtDisplay(0)
     console.log("YOURE SO BAD")
+
+    if(localStorage.dataEmojiNum == null) localStorage.setItem("dataEmojiNum", 0);
+    localStorage.dataEmojiNum++;
+    localStorage.setItem("dataEmoji"+localStorage.dataEmojiNum, JSON.stringify(dataEmoji))
+    dataEmoji = [];
 }
 
 

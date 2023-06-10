@@ -20,12 +20,12 @@ function closeGamePop(){
 }
 
 function showGamePop(){
-    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("pointBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
     if(lives == 0 || level > maxlevel){
         document.getElementById("next").style.display = "none";
-        document.getElementById("highScore").innerHTML = level - originallevel;
-        document.getElementById("highScoreBox").style.display = "block";
+        document.getElementById("point").innerHTML = level - originallevel;
+        document.getElementById("pointBox").style.display = "block";
         return
     }
     document.getElementById("next").style.display = "block";
@@ -33,7 +33,7 @@ function showGamePop(){
 
 function showStart(){
     document.getElementById("start").style.display = "block";
-    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("pointBox").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
     level = originallevel
     updateLevel()
@@ -135,6 +135,8 @@ function buttonPress(num){
 }
 
 function wrong(){
+    dataChimp.push(level-originallevel)
+
     console.log("WRONG")
     popTxtDisplay(-1)
     lives--;
@@ -204,6 +206,11 @@ function lose(){
     popTxtDisplay(0)
     console.log("YOURE SO BAD")
     showGamePop()
+
+    if(localStorage.dataChimpNum == null) localStorage.setItem("dataChimpNum", 0);
+    localStorage.dataChimpNum++;
+    localStorage.setItem("dataChimp"+localStorage.dataChimpNum, JSON.stringify(dataChimp))
+    dataChimp = [];
 }
 
 function generateUniqueNumbers(x, y) {

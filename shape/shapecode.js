@@ -23,15 +23,14 @@ function closeGamePop(){
 }
 
 function showGamePop(){
-    document.getElementById("highScoreBox").style.display = "none";
     document.getElementById("gameBox").style.display = "none";
-    document.getElementById("highScore").innerHTML = points;
-    document.getElementById("highScoreBox").style.display = "block";
+    document.getElementById("point").innerHTML = points;
+    document.getElementById("pointBox").style.display = "block";
 }
 
 function showStart(){
     document.getElementById("start").style.display = "block";
-    document.getElementById("highScoreBox").style.display = "none";
+    document.getElementById("pointBox").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
     points = 0;
     updatePoints()
@@ -111,6 +110,8 @@ function buttonPress(n){
 }
 
 function wrong(){
+    dataShape.push(points)
+
     console.log("WRONG")
     lives--
     updateLife();
@@ -170,6 +171,11 @@ function lose(){
     popTxtDisplay(0)
     console.log("YOURE SO BAD")
     showGamePop()
+
+    if(localStorage.dataShapeNum == null) localStorage.setItem("dataShapeNum", 0);
+    localStorage.dataShapeNum++;
+    localStorage.setItem("dataShape"+localStorage.dataShapeNum, JSON.stringify(dataShape))
+    dataShape = [];
 }
 
 function generateUniqueNumbers(x, y) {

@@ -1,3 +1,7 @@
+var dataChimp = []
+var dataEmoji = []
+var dataShape = []
+
 const wrongMsg = [
     "WRONG",
     "NOPE",
@@ -113,4 +117,88 @@ function closePop(){
 function help(){
     const pop = document.getElementById("pop");
     pop.style.display = "block";
+}
+
+
+
+if(localStorage.getItem("dataChimpNum") != null){
+    var max = JSON.parse(localStorage.getItem("dataChimp"+1))[2]
+    for (let i = 1; i <= localStorage.dataChimpNum; i++) {
+        max = JSON.parse(localStorage.getItem("dataChimp"+i))[2] > max ? JSON.parse(localStorage.getItem("dataChimp"+i))[JSON.parse(localStorage.getItem("dataChimp"+i)).length - 1] : max;   
+    }
+    document.getElementById("highScoreChimp").innerHTML = max
+}
+if(localStorage.getItem("dataEmojiNum") != null){
+    var max = JSON.parse(localStorage.getItem("dataEmoji"+1))[2]
+    for (let i = 1; i <= localStorage.dataEmojiNum; i++) {
+        max = JSON.parse(localStorage.getItem("dataEmoji"+i))[2] > max ? JSON.parse(localStorage.getItem("dataEmoji"+i))[JSON.parse(localStorage.getItem("dataEmoji"+i)).length - 1] : max;   
+    }
+    document.getElementById("highScoreEmoji").innerHTML = max
+}
+if(localStorage.getItem("dataShapeNum") != null){
+    var max = JSON.parse(localStorage.getItem("dataShape"+1))[2]
+    for (let i = 1; i <= localStorage.dataShapeNum; i++) {
+        max = JSON.parse(localStorage.getItem("dataShape"+i))[2] > max ? JSON.parse(localStorage.getItem("dataShape"+i))[JSON.parse(localStorage.getItem("dataShape"+i)).length - 1] : max;   
+    }
+    document.getElementById("highScoreShape").innerHTML = max
+}
+
+function openData(){
+    const data = document.getElementById("data");
+    if(data.style.display == "block"){
+        data.style.display = "none";
+        document.getElementById("dataChimp").innerHTML = "";
+        document.getElementById("dataEmoji").innerHTML = "";
+        document.getElementById("dataShape").innerHTML = "";
+        document.getElementById("dataChimpNum").innerHTML = "";
+        document.getElementById("dataEmojiNum").innerHTML = "";
+        document.getElementById("dataShapeNum").innerHTML = "";
+        return
+    }
+    data.style.display = "block";
+    var i = 1;
+    while(localStorage.getItem("dataChimp"+i) != null){
+        const dataTxtNum = document.createElement("p")
+        dataTxtNum.innerHTML = i
+        document.getElementById("dataChimpNum").appendChild(dataTxtNum)
+        const dataTxt = document.createElement("p")
+        dataTxt.innerHTML = JSON.parse(localStorage.getItem("dataChimp"+i))
+        document.getElementById("dataChimp").appendChild(dataTxt)
+        i++
+    }
+    var i = 1;
+    while(localStorage.getItem("dataEmoji"+i) != null){
+        const dataTxtNum = document.createElement("p")
+        dataTxtNum.innerHTML = i
+        document.getElementById("dataEmojiNum").appendChild(dataTxtNum)
+        const dataTxt = document.createElement("p")
+        dataTxt.innerHTML = JSON.parse(localStorage.getItem("dataEmoji"+i))
+        document.getElementById("dataEmoji").appendChild(dataTxt)
+        i++
+    }
+    var i = 1;
+    while(localStorage.getItem("dataShape"+i) != null){
+        const dataTxtNum = document.createElement("p")
+        dataTxtNum.innerHTML = i
+        document.getElementById("dataShapeNum").appendChild(dataTxtNum)
+        const dataTxt = document.createElement("p")
+        dataTxt.innerHTML = JSON.parse(localStorage.getItem("dataShape"+i))
+        document.getElementById("dataShape").appendChild(dataTxt)
+        i++
+    }
+}
+
+function clearData(){
+    // document.getElementById("dataChimp").innerHTML = "";
+    // document.getElementById("dataChimpNum").innerHTML = "";
+    // document.getElementById("highScoreChimp").innerHTML = "";
+
+    // document.getElementById("dataEmoji").innerHTML = "";
+    // document.getElementById("dataEmojiNum").innerHTML = "";
+    // document.getElementById("highScoreEmoji").innerHTML = "";
+    
+    // document.getElementById("dataShape").innerHTML = "";
+    // document.getElementById("dataShapeNum").innerHTML = "";
+    // document.getElementById("highScoreShape").innerHTML = "";
+    localStorage.clear();
 }

@@ -5,9 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <script src="code.js"></script>
+    <script defer src="code.js"></script>
 </head>
 <body>
+    <button class="data_button" onclick="openData()"></button>
+    <div class="data" id="data" style="display: none;">
+        <div class="data_box">
+            <button class="clear_data" onclick="clearData()">CLEAR</button>
+            <h1>CHIMP</h1>
+            <h1>EMOJI</h1>
+            <h1>SHAPE</h1>
+            <div class="data_inner_box">
+                <div class="data_num" id="dataChimpNum"></div>
+                <div id="dataChimp"></div>
+            </div>
+            <div class="data_inner_box">
+                <div class="data_num" id="dataEmojiNum"></div>
+                <div id="dataEmoji"></div>
+            </div>
+            <div class="data_inner_box">
+                <div class="data_num" id="dataShapeNum"></div>
+                <div id="dataShape"></div>
+            </div>
+        </div>
+    </div>
     <div class="pop" id="pop" style="display: none;">
         <p class="desc1"><span id="section1">MEMORY RECOLLECTION ABILITY</span><span id="section2">ATTENTION FOCUS CAPACITY</span><span id="section3">VISUAL SPATIAL REASONING</span></p>
         <div id="desc3">
@@ -22,15 +43,18 @@
         <a class="pad_txt" href="index.html">COGNITIVE TEST</a>
         <div class="stuff">
             <div class="title_outer_box">
-                <a href="chimp/chimp.html" class="title_box"><div class="title" id="chimpTitle">
-                    CHIMP
-                </div></a>
-                <a href="emoji/emoji.html" class="title_box"><div class="title" id="emojiTitle">
-                    EMOJI
-                </div></a>
-                <a href="shape/shape.html" class="title_box"><div class="title" id="shapeTitle">
-                    SHAPE
-                </div></a>
+                <a href="chimp/chimp.html" class="title_box">
+                    <div class="title" id="chimpTitle">CHIMP</div>
+                    <p class="high_score" id="highScoreChimp"></p>
+                </a>
+                <a href="emoji/emoji.html" class="title_box">
+                    <div class="title" id="emojiTitle">EMOJI</div>
+                    <p class="high_score" id="highScoreEmoji"></p>
+                </a>
+                <a href="shape/shape.html" class="title_box">
+                    <div class="title" id="shapeTitle">SHAPE</div>
+                    <p class="high_score" id="highScoreShape"></p>
+                </a>
             </div>
         </div>
         <p class="pad_txt help" onclick="help()">ABOUT</p>
