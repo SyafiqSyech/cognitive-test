@@ -76,12 +76,32 @@
 .emoji_ans_box{
     position: absolute;
     display: flex;
-    gap: 700px;
+    min-width: calc(50vw + 150px*2);
+    gap: 50vw;
     opacity: .3;
 }
 
 .emoji_ans{
     width: 150px;
+}
+
+@media only screen and (max-width: 600px) {
+    .emoji_ans_box{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-wrap: wrap;
+        width: 260px;
+        min-width: 0px;
+        gap: 250px 80px; 
+        justify-content: space-between;
+        opacity: .6;
+    }
+    
+    .emoji_ans{
+        width: 70px;
+    }
 }
 
 .start{

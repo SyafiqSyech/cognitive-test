@@ -47,6 +47,10 @@ body{
 }
 
 .stuff{
+    margin: 30.4px 0;
+    max-width: 100vw;
+    max-height: calc(100vh - 83.2*2px);
+    /* overflow: hidden; */
     display: flex;
     justify-content: center;
     align-items: center;

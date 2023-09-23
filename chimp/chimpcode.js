@@ -17,6 +17,7 @@ function closeGamePop(){
     document.getElementById("start").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
     timer()
+    chimpGameResize();
 }
 
 function showGamePop(){
@@ -41,6 +42,10 @@ function showStart(){
 
 function resetGame(){
     grid = [startingColumn, startingRow];
+
+    // for mobile
+    if(screen.width < screen.height) grid = [startingRow, startingColumn];
+
     level = originallevel;
     time = level*1000;
     lives = originallives;
@@ -152,8 +157,16 @@ function right(){
     console.log("Right")
     popTxtDisplay(1)
     level++
-    if((level-originallevel+1)%5 == 0) grid[0]++;
-    if((level-originallevel+1)%8 == 0) grid[1]++;
+    
+    // for mobile
+    if(screen.width < screen.height){
+        if((level-originallevel+1)%5 == 0) grid[1]++;
+        if((level-originallevel+1)%8 == 0) grid[0]++;
+    }else{
+        if((level-originallevel+1)%5 == 0) grid[0]++;
+        if((level-originallevel+1)%8 == 0) grid[1]++;
+    }
+
     updateLevel(level);
     if(level > maxlevel) win()
     showGamePop();

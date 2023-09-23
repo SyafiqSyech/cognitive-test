@@ -63,7 +63,7 @@ function showStart(){
     document.getElementById("start").style.display = "block";
     document.getElementById("pointBox").style.display = "none";
     document.getElementById("popTxt").style.display = "none";
-    level = originallevel
+    level = 1
     updateLevel()
 }
 
@@ -80,6 +80,8 @@ var emojiAns = document.querySelectorAll(".emoji_ans");
 var gameButtons = document.querySelectorAll(".game_button")
 var ans = null; 
 function startGame(){
+    emojiGameResize()
+
     updateLevel()
     updateLife()
 
